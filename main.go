@@ -29,9 +29,13 @@ func main() {
 	// connStr := "user=postgres password=postgres dbname=todos sslmode=disable"
 
 	// Get environment variables
-    connStr := os.Getenv("DATABASE_URL")
-    if connStr == "" {
+    connStr, errBool := os.LookupEnv("DATABASE_URL") 
+    if !errBool {
         log.Fatal("DATABASE_URL environment variable is required")
+    }
+	port, errBool := os.LookupEnv("PORT") 
+    if !errBool {
+        port = "8080"
     }
 
 	log.Println("Connecting to database...")
@@ -188,5 +192,5 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"message": "task updated"})
 	})
 
-	r.Run() // Run the server on port 8080
+	r.Run(port) // Run the server on port 8080
 }
