@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -191,6 +192,8 @@ func main() {
 		}
 		c.JSON(http.StatusOK, gin.H{"message": "task updated"})
 	})
-
-	r.Run(port) // Run the server on port 8080
+	err = r.Run(fmt.Sprintf(":%s", port))
+	if err != nil {
+		log.Fatalf("Could not connect to database: %v", err)
+	}
 }
