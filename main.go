@@ -16,30 +16,29 @@ import (
 	_ "github.com/lib/pq"
 )
 
-
 type Task struct {
-	ID          string    `json:"id"`
-	Title       string    `json:"title" validate:"required,min=3,max=100"`
-	Status      string    `json:"status" validate:"required,oneof=pending in-progress completed"`
+	ID     string `json:"id"`
+	Title  string `json:"title" validate:"required,min=3,max=100"`
+	Status string `json:"status" validate:"required,oneof=pending in-progress completed"`
 }
 
 func main() {
-	 // Load environment variables from .env file (only for local development)
-	 if err := godotenv.Load(); err != nil {
-        log.Fatal("Error loading .env file", err)
-    }
+	// Load environment variables from .env file (only for local development)
+	// if err := godotenv.Load(); err != nil {
+	// 	log.Fatal("Error loading .env file", err)
+	// }
 
 	// connStr := "user=postgres password=postgres dbname=todos sslmode=disable"
 
 	// Get environment variables
-    connStr, errBool := os.LookupEnv("DATABASE_URL") 
-    if !errBool {
-        log.Fatal("DATABASE_URL environment variable is required")
-    }
-	port, errBool := os.LookupEnv("PORT") 
-    if !errBool {
-        port = "8080"
-    }
+	connStr, errBool := os.LookupEnv("DATABASE_URL")
+	if !errBool {
+		log.Fatal("DATABASE_URL environment variable is required")
+	}
+	port, errBool := os.LookupEnv("PORT")
+	if !errBool {
+		port = "8080"
+	}
 
 	log.Println("Connecting to database...")
 	db, err := sql.Open("postgres", connStr)
@@ -95,9 +94,9 @@ func main() {
 			c.JSON(http.StatusBadRequest, gin.H{"validation_error": err.Error()})
 			return
 		}
-		
+
 		query := "Insert into todos (id, title, status) values ($1,$2,$3)"
-		_ , err := db.Exec(query, newTask.ID, newTask.Title, newTask.Status)
+		_, err := db.Exec(query, newTask.ID, newTask.Title, newTask.Status)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
