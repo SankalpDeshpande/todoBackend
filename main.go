@@ -194,8 +194,8 @@ func main() {
 		}
 		c.JSON(http.StatusOK, gin.H{"message": "task updated"})
 	})
-	err = r.Run(fmt.Sprintf(":%s", port))
+	err = r.Run("0.0.0.0:" + port)
 	if err != nil {
-		log.Fatalf("Could not connect to database: %v", err)
+		log.Fatal(fmt.Sprintf("Error starting server: %s", err))
 	}
 }
