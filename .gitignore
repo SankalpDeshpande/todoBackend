@@ -1,0 +1,14 @@
+# Ignore environment files
+.env
+
+# Ignore binaries and other build files
+/bin/
+/obj/
+*.exe
+
+# Ignore IDE/editor configurations
+.vscode/
+.idea/
+
+# Ignore logs
+*.log
