@@ -22,9 +22,9 @@ type Task struct {
 
 func main() {
 	 // Load environment variables from .env file (only for local development)
-	 if err := godotenv.Load(); err != nil {
-        log.Fatal("Error loading .env file")
-    }
+	//  if err := godotenv.Load(); err != nil {
+    //     log.Fatal("Error loading .env file")
+    // }
 
 	// connStr := "user=postgres password=postgres dbname=todos sslmode=disable"
 
