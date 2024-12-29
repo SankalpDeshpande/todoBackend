@@ -193,8 +193,8 @@ func main() {
 		}
 		c.JSON(http.StatusOK, gin.H{"message": "task updated"})
 	})
-	err = r.Run("0.0.0.0:" + port)
+	err = r.Run(":" + port)
 	if err != nil {
-		log.Fatal(fmt.Sprintf("Error starting server: %s", err))
+		log.Fatalf(fmt.Sprintf("Error starting server: %s", err))
 	}
 }
