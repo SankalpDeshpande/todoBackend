@@ -10,6 +10,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 	"github.com/google/uuid"
+	"github.com/joho/godotenv"
+
 	// "github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
@@ -23,9 +25,9 @@ type Task struct {
 
 func main() {
 	 // Load environment variables from .env file (only for local development)
-	//  if err := godotenv.Load(); err != nil {
-    //     log.Fatal("Error loading .env file")
-    // }
+	 if err := godotenv.Load(); err != nil {
+        log.Fatal("Error loading .env file")
+    }
 
 	// connStr := "user=postgres password=postgres dbname=todos sslmode=disable"
 
